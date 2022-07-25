@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+sources=./ghc.nix/nix/sources.json
+nixpkgs_rev="$(jq -r '.nixpkgs.rev' $sources)"
+nixpkgs_unstable_rev="$(jq -r '."nixpkgs-unstable".rev' $sources)"
+tmp="$(mktemp)"
+cp flake-template.nix "$tmp"
+sed -i "s/NIXPKGS_REV/$nixpkgs_rev/g" "$tmp"
+sed -i "s/NIXPKGS_UNSTABLE_REV/$nixpkgs_unstable_rev/g" "$tmp"
+mv "$tmp" flake.nix
+nix flake update
+
+# echo "nixpkgs_branch: $nixpkgs_branch"
+# cp flake-template.nix "$tmp"
+# sed -i "s/NIXPKGS_BRANCH/$nixpkgs_branch/g" "$tmp"
+# cp "$tmp" flake.nix
+# nix flake lock
+# cp flake.lock "$tmp"
+# function jqi {
+#     tmp="$(mktemp)"
+#     jq "$1" "$2" > "$tmp" && mv "$tmp" "$2"
+# }
+# function convert {
+#     query=".$1 | {narHash: (\"sha256-\" + .sha256), rev: .rev}"
+#     data=$(jq "$query" $sources)
+#     echo "$data"
+#     jqi ".nodes.$1.locked += $data" "flake.lock"
+# }
+# convert nixpkgs
+# # convert "nixpkgs-unstable"
+# # jq '.nodes.nixpkgs
