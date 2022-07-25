@@ -1,3 +1,0 @@
-[submodule "ghc.nix"]
-	path = ghc.nix
-	url = https://github.com/alpmestan/ghc.nix

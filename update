@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+rm -rf ghc.nix
+git clone --depth=1 --branch=master https://github.com/alpmestan/ghc.nix.git ghc.nix
+rm -rf ./ghc.nix/.git
 sources=./ghc.nix/nix/sources.json
 nixpkgs_rev="$(jq -r '.nixpkgs.rev' $sources)"
 nixpkgs_unstable_rev="$(jq -r '."nixpkgs-unstable".rev' $sources)"

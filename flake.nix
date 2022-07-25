@@ -13,7 +13,6 @@
         nixpkgs-unstable = import nixpkgs-unstable { inherit system; };
         withIde = true;
         withGhcid = true;
-        withHadrianDeps = true;
       };
     });
 }
