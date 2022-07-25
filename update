@@ -11,4 +11,4 @@ cp flake-template.nix "$tmp"
 sed -i "s/NIXPKGS_REV/$nixpkgs_rev/g" "$tmp"
 sed -i "s/NIXPKGS_UNSTABLE_REV/$nixpkgs_unstable_rev/g" "$tmp"
 mv "$tmp" flake.nix
-nix flake update
+nix flake lock
